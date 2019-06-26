@@ -1,0 +1,108 @@
+// ВАРИАНТ 12 (ТРЕУГОЛЬНИКИ)
+
+#include <stdio.h>
+#include <math.h>
+
+void printTriangleType(float a, float b, float c);
+void printTrianglePerimeter(float a, float b, float c);
+void printTriangleSquare(float a, float b, float c);
+void printTriangleRadiusses(float a, float b, float c);
+
+/*
+    a, b, c - стороны
+    P - периметр
+    p - полупериметр
+    S - площадь
+    r - радиус вписанной окружности
+    R - радиус описанной окружности
+*/
+
+int main()
+{
+    float x1, y1, x2, y2, x3, y3;
+    float a, b, c;
+
+    printf(" Enter triangle coordinates: \n");
+
+    printf("\n x1 = ");
+    scanf("%f", &x1);
+
+    printf(" y1 = ");
+    scanf("%f", &y1);
+
+    printf("\n x2 = ");
+    scanf("%f", &x2);
+
+    printf(" y2 = ");
+    scanf("%f", &y2);
+
+    printf("\n x3 = ");
+    scanf("%f", &x3);
+
+    printf(" y3 = ");
+    scanf("%f", &y3);
+
+    // вычисление трёх сторон по теореме Пифагора
+    a = sqrt(powl((x2 - x1), 2) + powl((y2 - y1), 2));
+    b = sqrt(powl((x3 - x2), 2) + powl((y3 - y2), 2));
+    c = sqrt(powl((x1 - x3), 2) + powl((y1 - y3), 2));
+
+    printf("\n\n Triangle data:\n");
+
+    printTriangleType(a, b, c);
+    printTrianglePerimeter(a, b, c);
+    printTriangleSquare(a, b, c);
+    printTriangleRadiusses(a, b, c);
+
+    return 0;
+}
+
+void printTriangleType(float a, float b, float c)
+{
+    printf(" Type :");
+
+    if (a == b == c) {
+        printf("Equilateral \n");
+    }
+    else if (a == b || a == c || b == c) {
+        printf("Isosceles \n");
+    }
+    else {
+        printf("Arbitrary \n");
+    }
+}
+
+void printTrianglePerimeter(float a, float b, float c)
+{
+    float P;
+
+    P = a + b + c;
+
+    printf(" P = %0.2f \n", P);
+}
+
+void printTriangleSquare(float a, float b, float c)
+{
+    float S;
+    float p;
+
+    p = (a + b + c) / 2;
+    S = sqrt(p * (p - a) * (p - b) * (p - c)); // расчёт по формуле Герона
+
+    printf(" S = %0.2f \n", S);
+}
+
+void printTriangleRadiusses(float a, float b, float c)
+{
+    float r, R;
+    float p, S;
+
+    p = (a + b + c) / 2;
+    S = sqrt(p * (p - a) * (p - b) * (p - c)); // расчёт по формуле Герона
+
+    r = S / p;
+    R = a * b * c / (4 * S);
+
+    printf(" r = %0.2f \n", r);
+    printf(" R = %0.2f \n", R);
+}
